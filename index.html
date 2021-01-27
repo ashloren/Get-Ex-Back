@@ -43,7 +43,7 @@ That Attract Your Visitors Eye!!!</p>
 
 
                     <p class="bodytext">Dear Internet Marketers,</p>
-                    <p class="bodytext"><img src="https://dl.dropboxusercontent.com/u/69652429/Quotes/hard.jpg" width="212">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Quisque sollicitudin elementum risus. Sed id felis. Aenean ullamcorper pellentesque nunc. Cras tincidunt augue rhoncus nunc. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Phasellus faucibus ultrices diam. Nulla semper. Nunc ultricies odio at massa. Pellentesque luctus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Cras massa. Donec vitae velit.</p>
+                    <p class="bodytext"><img src="" width="212">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Quisque sollicitudin elementum risus. Sed id felis. Aenean ullamcorper pellentesque nunc. Cras tincidunt augue rhoncus nunc. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Phasellus faucibus ultrices diam. Nulla semper. Nunc ultricies odio at massa. Pellentesque luctus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Cras massa. Donec vitae velit.</p>
 
 			
        
@@ -52,6 +52,43 @@ That Attract Your Visitors Eye!!!</p>
 <p align="center"><img src="images/paperback-med.jpg"><img src="images/paperback-small.jpg"></p>
 
 				   <p align="center"><img src="images/order.jpg"></p>
+
+<div id="smart-button-container">
+      <div style="text-align: center;">
+        <div id="paypal-button-container"></div>
+      </div>
+    </div>
+  <script src="https://www.paypal.com/sdk/js?client-id=sb&currency=USD" data-sdk-integration-source="button-factory"></script>
+  <script>
+    function initPayPalButton() {
+      paypal.Buttons({
+        style: {
+          shape: 'rect',
+          color: 'gold',
+          layout: 'vertical',
+          label: 'paypal',
+          
+        },
+
+        createOrder: function(data, actions) {
+          return actions.order.create({
+            purchase_units: [{"amount":{"currency_code":"USD","value":1}}]
+          });
+        },
+
+        onApprove: function(data, actions) {
+          return actions.order.capture().then(function(details) {
+            alert('Transaction completed by ' + details.payer.name.given_name + '!');
+          });
+        },
+
+        onError: function(err) {
+          console.log(err);
+        }
+      }).render('#paypal-button-container');
+    }
+    initPayPalButton();
+  </script>
 
 <br>
 <style type="text/css">
